@@ -1,6 +1,5 @@
 body {
-    background-color: lightblue;
-    margin: 0px;
+    background-color: skyblue;
 } 
 
 [class*='cloud'] {
@@ -8,9 +7,6 @@ body {
     
     height: 10%;
     width: 7%;
-
-    min-height: 20px;
-    min-width: 30px;
 
     background-color: white;
 
@@ -21,42 +17,34 @@ body {
     top: 7%;
     left: 7%;
 }
-
 .cloud2 {
     top: 7%;
     left: 12%;
 }
-
 .cloud3 {
     top: 7%;
     left: 17%;
 }
-
 .cloud4 {
     top: 7%;
     left: 47%;
 }
-
 .cloud5 {
     top: 7%;
     left: 52%;
 }
-
 .cloud6 {
     top: 7%;
     left: 57%;
 }
-
 .cloud7 {
     top: 20%;
     left: 25%;
 }
-
 .cloud8 {
     top: 20%;
     left: 30%;
 }
-
 .cloud9 {
     top: 20%;
     left: 35%;
@@ -64,206 +52,49 @@ body {
 
 .sun {
     position: absolute;
-    top: 6vh;
-    right: 6vh;
-    width: 20vh;
-    height: 20vh;
+
+    top: 3%;
+    right: 5%;
+
+    width: 13%;
+    height: 25%;
+
     border-radius: 50%;
-    min-height: 30px;
-    min-width: 30px;
+   
     background-color: yellow;
 }
 
 .earth {
     position: absolute;
+
     top: 40%;
-    height: 60%;
+    left: 0%;
+
     width: 100%;
+    height: 60%;
+  
     background-color: green;
 }
 
 .road {
     position: absolute;
+
     top: 40%;
+
     width: 100%;
     height: 50%;
+
     background-color: rgb(59, 52, 52);
-}
-
-.cockpit {
-    position: absolute;
-    top: 25%;
-    left: 35%;
-    width: 30%;
-    height: 30%;
-    min-height: 20px;
-    min-width: 30px;
-    border-radius: 30% 30% 20% 20%;
-    background-color: red;
-}
-
-[class*='tire'] {
-    position: absolute;
-    background-color: gray;
-    top: 300px;
-    width: 70px;
-    height: 70px;
-    border: 20px solid black;
-    border-radius: 75px;
-    display: flex;
-    align-items: center;
-    
-}
-
-[class*='block'] {
-    width: 100%;
-    height: 5px;
-    background-color: black;
-    position: absolute;   
-}
-
-.block1 {
-    transform: rotate(45deg);
-}
-.block2 {
-    transform: rotate(-90deg);
-}
-.block3 {
-    transform: rotate(-45deg);
-}
-
-.tire1 {
-    left: 37%;
-}
-.tire2 {
-    left: 58%;
-}
-
-.top {
-    position: absolute;
-
-    top: 10%;
-    left: 42%;
-
-    width: 15%;
-    height: 30%;
-
-    min-height: 20;
-    min-width: 15%;
-    border-radius: 25% 25% 0% 0%;
-    
-    background-color: red;
-}
-
-.light {
-    position: absolute;
-
-    border: 2px solid black;
-    top: 40%;
-    left: 0%;
-
-    width: 10%;
-    height: 15%;
-
-    background-color: yellow;
-
-    border-radius: 10% 30% 30% 10%;
-}
-
-.window1 {
-    position: absolute;
-
-    top: 8%;
-    left: 4%;
-
-    width: 40%;
-    height: 35%;
-
-    border-radius: 35% 5% 5% 5%;
-    
-    background-color: rgb(199, 219, 225);
-
-    border-style: solid;
-    border-width: 3px;
-    border-color: black;
-}
-
-.window2 {
-    position: absolute;
-
-    top: 8%;
-    left: 50%;
-
-    width: 45%;
-    height: 35%;
-
-    border-radius: 5% 35% 5% 5%;
-    
-    background-color: rgb(199, 219, 225);
-
-    border-style: solid;
-    border-width: 3px;
-    border-color: black;
-}
-
-.door1 {
-    position:absolute;
-    
-    top: -2%;
-    left: 25%;
-    
-    height: 100%;
-    width: 20%;
-
-    background-color: black;
-
-    border-radius: 70% 5% 0% 0%;
-
-    border-style: solid;
-    border-width: 3px;
-    border-bottom-width: 0px;
-    background-color: red;
-}
-
-.door2 {
-    position:absolute;
-    
-    top: -2%;
-    left: 50%;
-    
-    height: 100%;
-    width: 20%;
-
-    background-color: black;
-
-    border-radius: 5% 70% 0% 0%;
-
-    border-style: solid;
-    border-width: 3px;
-    border-bottom-width: 0px;
-    background-color: red;
-}
-
-[class*='handle'] {
-    position: absolute;
-    top: 30%;
-    height: 15%;
-    width: 18%;
-    background-color: black;
-    border-radius:90% 90% 0% 0%;
-}
-.handle1 {
-    left: 70%;
-}
-.handle2 {
-    left: 20%;
 }
 
 [class*='lane'] {
     position: absolute;
+
     top: 50%;
+
     width: 5%;
     height: 5%;
+
     background-color: white;
 }
 
@@ -297,3 +128,162 @@ body {
 .lane10 {
     left: 93%;
 }
+
+.m_top {
+    position: absolute;
+
+    top: 10%;
+    left: 42%;
+
+    width: 15%;
+    height: 30%;
+
+    border-radius: 25% 25% 0% 0%;
+    
+    background-color: red;
+}
+
+.window {
+    position: absolute;
+
+    top: 12%;
+    left: 42.5%;
+
+    width: 6%;
+    height: 13%;
+
+    border-radius: 35% 5% 5% 5%;
+    
+    background-color: rgb(199, 219, 225);
+
+    
+    border-style: solid;
+    border-width: 0.2vw;
+    border-color: black;
+}
+
+.window2 {
+    position: absolute;
+
+    top: 12%;
+    left: 50%;
+
+    width: 6%;
+    height: 13%;
+
+    border-radius: 5% 35% 5% 5%;
+    
+    background-color: rgb(199, 219, 225);
+
+    border-style: solid;
+    border-width: 0.2vw;
+    border-color: black;
+}
+
+.m_interrior {
+    position: absolute;
+
+    top: 27%;
+    left: 35%;
+
+    width: 30%;
+    height: 30%;
+
+    border-radius: 45% 20% 40% 20%;
+    
+    background-color: red;
+}
+
+.light {
+    position: absolute;
+
+    top: 42%;
+    left: 0%;
+
+    width: 10%;
+    height: 15%;
+
+    border: 2% solid black;
+    background-color: yellow;
+    border-radius: 10% 30% 30% 10%;
+}
+
+.door1 {
+    position:absolute;
+    
+    top: 5%;
+    left: 25%;
+    
+    height: 94%;
+    width: 20%;
+
+    background-color: black;
+
+    border-radius: 70% 5% 0% 0%;
+
+    border-style: solid;
+    border-width: 0.2vw;
+    border-bottom-width: 0px;
+    background-color: red;
+}
+
+.door2 {
+    position:absolute;
+    
+    top: 5%;
+    left: 50%;
+    
+    height: 94%;
+    width: 20%;
+
+    background-color: black;
+
+    border-radius: 5% 70% 0% 0%;
+
+    border-style: solid;
+    border-width: 0.2vw;
+    border-bottom-width: 0px;
+    background-color: red;
+}
+
+[class*='handle'] {
+    position: absolute;
+    top: 30%;
+    height: 15%;
+    width: 18%;
+    background-color: black;
+    border-radius:90% 90% 0% 0%;
+}
+
+.handle1 {
+    left: 70%;
+}
+.handle2 {
+    left: 20%;
+}
+
+
+[class*='tire'] { 
+    background-color: gray;
+
+    position: absolute;
+
+    top: 50%;
+
+    width: 4%;
+    height: 10%;
+    
+    border: 1.5vh solid black;
+    border-radius: 100%;
+    
+    display: flex;
+    align-items: center;
+
+}
+.tire1 {
+    left: 38%;
+}
+.tire2 {
+    left: 55%;
+}
+
