@@ -55,16 +55,16 @@ req.setRequestHeader("X-Master-Key", "$2b$10$FxWaSLC9x2/A2qDK3nrrS.cSLoStAjfgOYn
 req.send();
 
 let updateJSONbin = function() {
-  let req = new XMLHttpRequest();
+  // let req = new XMLHttpRequest();
   var json = JSON.stringify(todoList);
   
   req.open("PUT", "https://api.jsonbin.io/v3/b/63486a2f65b57a31e69552bc", true);
   req.setRequestHeader("Content-Type", "application/json");
   req.setRequestHeader("X-Master-Key", "$2b$10$FxWaSLC9x2/A2qDK3nrrS.cSLoStAjfgOYnqGUzBW0XuUnErp.DmC");
   req.onload = function() {
-    var list = JSON.parse(req.responseText);
+    var list = req.response;
     if (req.readyState == 4 && req.status == '200') {
-      console.table(list);
+      console.log(list.record);
     } else {
       console.error(list);
     }
@@ -113,16 +113,26 @@ let updateTodoList = function() {
   }
 
  //add all elements
-let filterInput = document.getElementById("inputSearch");   
+let filterInput = document.getElementById("inputSearch");
 for (let todo in todoList) {
   if (
     (filterInput.value == "") ||
     (todoList[todo].title.includes(filterInput.value)) ||
     (todoList[todo].description.includes(filterInput.value))
   ) {
-    let newElement = document.createElement("p");
-    let newContent = document.createTextNode(todoList[todo].title + " " +
-                                             todoList[todo].description);
+    let newElement = document.createElement("tr");
+    newElement.style.width = '100px';
+    let newTD = document.createElement("td"); 
+
+    newTD.append(todoList[todo].title);
+    newElement.appendChild(newTD);
+    
+    newTD = document.createElement("td");
+    
+    newTD.append(todoList[todo].description);
+    newElement.appendChild(newTD);
+
+    //delete button
     let newDeleteButton = document.createElement("input");
         newDeleteButton.type = "button";
         newDeleteButton.value = "x";
@@ -131,7 +141,7 @@ for (let todo in todoList) {
                 deleteTodo(todo);
             });
     
-    newElement.appendChild(newContent);
+    // newElement.appendChild(newContent);
     todoListDiv.appendChild(newElement);
     newElement.appendChild(newDeleteButton);
     }
