@@ -1,0 +1,22 @@
+[id='headerTable'] td {
+    border: 1px solid #cccccc;
+    height: 20px;
+    width: 45vw;
+    text-align: center;
+    vertical-align: middle;
+}
+.task {
+    border: 1px solid #cccccc;
+    height: 15px;
+    width: 45vw;
+    text-align: center;
+    vertical-align: middle;
+}
+input[type="button"] {
+    border: 1px solid #cccccc;
+    height: 25px;
+    width: 2vw;
+    text-align: center;
+    vertical-align: middle;
+}
+

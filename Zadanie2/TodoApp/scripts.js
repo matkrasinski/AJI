@@ -1,61 +1,22 @@
 "use strict"
 let todoList = []; //declares a new array for Your todo list
-//
-// let initList = function() {
-//     let savedList = window.localStorage.getItem("todos");
-//     if (savedList != null)
-//         todoList = JSON.parse(savedList);
-//     else
-//     //code creating a default list with 2 items
-//   todoList.push(
-//   {
-//       title: "Learn JS",
-//       description: "Create a demo application for my TODO's",
-//       place: "445",
-//       dueDate: new Date(2019,10,16)
-//   },
-//   {
-//       title: "Lecture test",
-//       description: "Quick test from the first three lectures",
-//       place: "F6",
-//       dueDate: new Date(2019,10,17)
-//   }
-//       // of course the lecture test mentioned above will not take place
-//   );
-// }
-// $.ajax({
-//     // copy Your bin identifier here. It can be obtained in the dashboard
-//     url: 'https://api.jsonbin.io/b/6348595965b57a31e6954369',
-//     type: 'GET',
-//     headers: { //Required only if you are trying to access a private bin
-//       'Access-Control-Allow-Origin' : '*',
-//       'Access-Control-Allow-Credentials' : 'true',
-//       'Access-Control-Allow-Methods:' : 'GET',
-//       'Access-Control-Allow- Headers' : 'Origin',  
-//       'secret-key':'$2b$10$FxWaSLC9x2/A2qDK3nrrS.cSLoStAjfgOYnqGUzBW0XuUnErp.DmC'
-//     },
-//       success: (data) => {
-//       console.log(data);
-//       todoList = data;
-//     },
-//     error: (err) => {
-//       console.log(err.responseJSON);
-//     }
-// });
 
-let req = new XMLHttpRequest();
-req.onreadystatechange = () => {
-  if (req.readyState == XMLHttpRequest.DONE) {
-    todoList = req.response.record;
-  }
-};
-req.open("GET", "https://api.jsonbin.io/v3/b/63486a2f65b57a31e69552bc/latest", true);
-req.responseType = 'json';
-req.setRequestHeader("X-Master-Key", "$2b$10$FxWaSLC9x2/A2qDK3nrrS.cSLoStAjfgOYnqGUzBW0XuUnErp.DmC");
-req.send();
+let initList = function() {
+    let req = new XMLHttpRequest();
+    req.onreadystatechange = () => {
+      if (req.readyState == XMLHttpRequest.DONE) {
+        todoList = req.response.record;
+      }
+    };
+    req.open("GET", "https://api.jsonbin.io/v3/b/63486a2f65b57a31e69552bc/latest", true);
+    req.responseType = 'json';
+    req.setRequestHeader("X-Master-Key", "$2b$10$FxWaSLC9x2/A2qDK3nrrS.cSLoStAjfgOYnqGUzBW0XuUnErp.DmC");
+    req.send();
+}
+initList();
 
 let updateJSONbin = function() {
-  // let req = new XMLHttpRequest();
+  let req = new XMLHttpRequest();
   var json = JSON.stringify(todoList);
   
   req.open("PUT", "https://api.jsonbin.io/v3/b/63486a2f65b57a31e69552bc", true);
@@ -76,8 +37,6 @@ let deleteTodo = function(index) {
   todoList.splice(index,1);
   updateJSONbin();
 }
-// initList();
-
 
 let addTodo = function() {
   //get the elements in the form
@@ -112,7 +71,6 @@ let updateTodoList = function() {
       todoListDiv.removeChild(todoListDiv.firstChild);
   }
 
- //add all elements
 let filterInput = document.getElementById("inputSearch");
 for (let todo in todoList) {
   if (
@@ -121,14 +79,13 @@ for (let todo in todoList) {
     (todoList[todo].description.includes(filterInput.value))
   ) {
     let newElement = document.createElement("tr");
-    newElement.style.width = '100px';
     let newTD = document.createElement("td"); 
-
+    newTD.className = 'task';
     newTD.append(todoList[todo].title);
     newElement.appendChild(newTD);
     
     newTD = document.createElement("td");
-    
+    newTD.className = 'task';
     newTD.append(todoList[todo].description);
     newElement.appendChild(newTD);
 
@@ -136,14 +93,16 @@ for (let todo in todoList) {
     let newDeleteButton = document.createElement("input");
         newDeleteButton.type = "button";
         newDeleteButton.value = "x";
+        newDeleteButton.id = "delete_btn";
+        // newDeleteButton.className = 'task';
         newDeleteButton.addEventListener("click",
             function() {
                 deleteTodo(todo);
             });
     
     // newElement.appendChild(newContent);
-    todoListDiv.appendChild(newElement);
     newElement.appendChild(newDeleteButton);
+    todoListDiv.appendChild(newElement);
     }
   }
 }
