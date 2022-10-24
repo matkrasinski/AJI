@@ -1,17 +1,28 @@
 [id='headerTable'] td {
     border: 1px solid #cccccc;
     height: 20px;
-    width: 45vw;
     text-align: center;
     vertical-align: middle;
 }
-.task {
+[class*='task'] {
     border: 1px solid #cccccc;
     height: 15px;
-    width: 45vw;
     text-align: center;
     vertical-align: middle;
 }
+.task1 {
+    width: 20.3vw;
+}
+.task2 {
+    width: 90vw;
+}
+.title {
+    width: 20vw;
+}
+.desc {
+    width: 90vw;
+}
+
 input[type="button"] {
     border: 1px solid #cccccc;
     height: 25px;

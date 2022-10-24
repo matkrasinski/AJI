@@ -2,35 +2,39 @@
 let todoList = []; //declares a new array for Your todo list
 
 let initList = function() {
-    let req = new XMLHttpRequest();
-    req.onreadystatechange = () => {
-      if (req.readyState == XMLHttpRequest.DONE) {
-        todoList = req.response.record;
-      }
-    };
-    req.open("GET", "https://api.jsonbin.io/v3/b/63486a2f65b57a31e69552bc/latest", true);
-    req.responseType = 'json';
-    req.setRequestHeader("X-Master-Key", "$2b$10$FxWaSLC9x2/A2qDK3nrrS.cSLoStAjfgOYnqGUzBW0XuUnErp.DmC");
-    req.send();
+  $.ajax({
+    // copy Your bin identifier here. It can be obtained in the dashboard
+    url: 'https://api.jsonbin.io/v3/b/63486a2f65b57a31e69552bc',
+    type: 'GET',
+    headers: { //Required only if you are trying to access a private bin
+      'X-MASTER-KEY': '$2b$10$FxWaSLC9x2/A2qDK3nrrS.cSLoStAjfgOYnqGUzBW0XuUnErp.DmC',
+    },
+    success: (data) => {
+      todoList = data.record;
+    },
+    error: (err) => {
+      console.log(err.responseJSON);
+    }
+   });
 }
 initList();
 
 let updateJSONbin = function() {
-  let req = new XMLHttpRequest();
-  var json = JSON.stringify(todoList);
-  
-  req.open("PUT", "https://api.jsonbin.io/v3/b/63486a2f65b57a31e69552bc", true);
-  req.setRequestHeader("Content-Type", "application/json");
-  req.setRequestHeader("X-Master-Key", "$2b$10$FxWaSLC9x2/A2qDK3nrrS.cSLoStAjfgOYnqGUzBW0XuUnErp.DmC");
-  req.onload = function() {
-    var list = req.response;
-    if (req.readyState == 4 && req.status == '200') {
-      console.log(list.record);
-    } else {
-      console.error(list);
+  $.ajax({
+    url: 'https://api.jsonbin.io/v3/b/63486a2f65b57a31e69552bc',
+    type: 'PUT',
+    headers: { //Required only if you are trying to access a private bin
+      'X-MASTER-KEY': '$2b$10$FxWaSLC9x2/A2qDK3nrrS.cSLoStAjfgOYnqGUzBW0XuUnErp.DmC',
+    },
+    contentType: 'application/json',
+    data: JSON.stringify(todoList),
+    success: (data) => {
+      console.log(data);
+    },
+    error: (err) => {
+      console.log(err.responseJSON);
     }
-  }
-  req.send(json);
+  });
 }
 
 let deleteTodo = function(index) {
@@ -80,12 +84,12 @@ for (let todo in todoList) {
   ) {
     let newElement = document.createElement("tr");
     let newTD = document.createElement("td"); 
-    newTD.className = 'task';
+    newTD.className = 'task1';
     newTD.append(todoList[todo].title);
     newElement.appendChild(newTD);
     
     newTD = document.createElement("td");
-    newTD.className = 'task';
+    newTD.className = 'task2';
     newTD.append(todoList[todo].description);
     newElement.appendChild(newTD);
 
@@ -107,3 +111,4 @@ for (let todo in todoList) {
   }
 }
 setInterval(updateTodoList, 1000);
+
