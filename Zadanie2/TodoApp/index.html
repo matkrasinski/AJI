@@ -21,20 +21,21 @@
             <label>Due date</label>
             <input type="date" id="inputDate"/>
             <input type="button" value="add"
-            onclick="addTodo()"/>
+            onclick="addTodo(), updateTodoList()"/>
         </form>
-        <div>
+        <div id="inputDiv">
             <label >Search tasks by title</label>
-            <input type="text" id="inputSearch" placeholder="Type Your seach here..."/>
-        </div>
-        <div>
+            <input type="text" id="inputSearch" placeholder="Type Your seach here..." onchange="updateTodoList()"/>
+            <br>
             <label>Search tasks by date</label>
-            <input type="date" id="startDate"/>
-            <input type="date" id="endDate"/>
+            <label> from </label>
+            <input type="date" id="startDate" onchange="updateTodoList()"/>
+            <label> to </label>
+            <input type="date" id="endDate"  
+                    onchange="updateTodoList()"/>
         </div>
-    
-        <div class="container-fluid p-3 bg-primary text-white text-center" id="todoListView">
 
+        <div class="container-fluid p-3 bg-primary text-white text-center" id="todoListView">
         </div>     
     </body>
 </html>

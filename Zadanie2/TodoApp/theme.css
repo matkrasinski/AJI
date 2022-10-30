@@ -17,17 +17,23 @@
     width: 90vw;
 }
 .title {
+    font-weight: bold;
     width: 20vw;
 }
 .desc {
+    font-weight: bold;
     width: 90vw;
 }
 
-input[type="button"] {
+input[id="delete_btn"] {
     border: 1px solid #cccccc;
     height: 25px;
     width: 2vw;
     text-align: center;
     vertical-align: middle;
+}
+
+form, [id="inputDiv"] {
+    padding: 1%;
 }
 

@@ -11,6 +11,7 @@ let initList = function() {
     },
     success: (data) => {
       todoList = data.record;
+      updateTodoList();
     },
     error: (err) => {
       console.log(err.responseJSON);
@@ -38,7 +39,12 @@ let updateJSONbin = function() {
 }
 
 let deleteTodo = function(index) {
-  todoList.splice(index,1);
+  if (todoList.length != 1) {
+    todoList.splice(index,1);
+  } else {
+    addTodo();
+    todoList.splice(index,1);
+  }
   updateJSONbin();
 }
 
@@ -60,10 +66,14 @@ let addTodo = function() {
         place: newPlace,
         dueDate: newDate
     };
-  //add item to the list
-    todoList.push(newTodo);
-    window.localStorage.setItem("todos", JSON.stringify(todoList));
-    updateJSONbin();
+    //add item to the list
+    if (newTodo.title != "" && newTodo.description != "" &&
+        newTodo.place != "" && convertToNumber(newTodo.dueDate) != 19700101) {
+          todoList.push(newTodo);
+          updateJSONbin();
+        }
+    // window.localStorage.setItem("todos", JSON.stringify(todoList));
+    
 }
 
 let convertToNumber = function(date) {
@@ -100,45 +110,46 @@ let updateTodoList = function() {
   todoListDiv.appendChild(newRow);
   
 
-let filterInput = document.getElementById("inputSearch");
-var endDate = convertToNumber(new Date(document.getElementById("endDate").value));
-var startDate = convertToNumber(new Date(document.getElementById("startDate").value));
+  let filterInput = document.getElementById("inputSearch");
+  var endDate = convertToNumber(new Date(document.getElementById("endDate").value));
+  var startDate = convertToNumber(new Date(document.getElementById("startDate").value));
 
-for (let todo in todoList) {
-  let thisDate = convertToNumber(new Date(todoList[todo].dueDate));
-  if (
-    ((filterInput.value == "") ||
-    (todoList[todo].title.includes(filterInput.value)) ||
-    (todoList[todo].description.includes(filterInput.value))) &&
-    ((thisDate >= startDate && thisDate <= endDate) || !endDate || !startDate)
-  ) {
-    let newElement = document.createElement("tr");
-    let newTD = document.createElement("td"); 
-    newTD.className = 'task1';
-    newTD.append(todoList[todo].title);
-    newElement.appendChild(newTD);
-    
-    newTD = document.createElement("td");
-    newTD.className = 'task2';
-    newTD.append(todoList[todo].description);
-    newElement.appendChild(newTD);
+  for (let todo in todoList) {
+    let thisDate = convertToNumber(new Date(todoList[todo].dueDate));
+    if (
+      ((filterInput.value == "") ||
+      (todoList[todo].title.includes(filterInput.value)) ||
+      (todoList[todo].description.includes(filterInput.value))) &&
+      (todoList[todo].title != "" && todoList[todo].description != "") &&
+      ((thisDate >= startDate && thisDate <= endDate) || !endDate || !startDate ||
+      thisDate == 19700101) // null value is converted to this date 1970/01/01 
+    ) {
+      let newElement = document.createElement("tr");
+      let newTD = document.createElement("td"); 
+      newTD.className = 'task1';
+      newTD.append(todoList[todo].title);
+      newElement.appendChild(newTD);
+      
+      newTD = document.createElement("td");
+      newTD.className = 'task2';
+      newTD.append(todoList[todo].description);
+      newElement.appendChild(newTD);
 
-    //delete button
-    let newDeleteButton = document.createElement("input");
-        newDeleteButton.type = "button";
-        newDeleteButton.value = "x";
-        newDeleteButton.id = "delete_btn";
-        // newDeleteButton.className = 'task';
-        newDeleteButton.addEventListener("click",
-            function() {
-                deleteTodo(todo);
-            });
-    
-    // newElement.appendChild(newContent);
-    newElement.appendChild(newDeleteButton);
-    todoListDiv.appendChild(newElement);
+      //delete button
+      let newDeleteButton = document.createElement("input");
+          newDeleteButton.type = "button";
+          newDeleteButton.value = "x";
+          newDeleteButton.id = "delete_btn";
+          // newDeleteButton.className = 'task';
+          newDeleteButton.addEventListener("click",
+              function() {
+                  deleteTodo(todo);
+                  updateTodoList();
+              });
+      
+      // newElement.appendChild(newContent);
+      newElement.appendChild(newDeleteButton);
+      todoListDiv.appendChild(newElement);
+      }
     }
-  }
 }
-setInterval(updateTodoList, 1000);
-
