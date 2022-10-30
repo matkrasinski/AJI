@@ -66,6 +66,19 @@ let addTodo = function() {
     updateJSONbin();
 }
 
+let convertToNumber = function(date) {
+    var currentDayOfMonth = date.getDate();
+    var currentMonth = date.getMonth() + 1;
+    var currentYear = date.getFullYear();
+    if (currentMonth < 10) {
+      currentMonth = "0" + currentMonth;
+    } 
+    if (currentDayOfMonth < 10) {
+      currentDayOfMonth = "0" + currentDayOfMonth;
+    }
+    return parseInt(currentYear + "" + currentMonth + "" + currentDayOfMonth);
+}
+
 let updateTodoList = function() {
   let todoListDiv =
   document.getElementById("todoListView");
@@ -75,12 +88,29 @@ let updateTodoList = function() {
       todoListDiv.removeChild(todoListDiv.firstChild);
   }
 
+  let newRow = document.createElement("tr");
+  let newData = document.createElement("td");
+  newData.append("Title");
+  newRow.appendChild(newData);
+  newData.className = "title"; 
+  newData = document.createElement("td");
+  newData.append("Description");
+  newRow.appendChild(newData);
+  newData.className = "desc";
+  todoListDiv.appendChild(newRow);
+  
+
 let filterInput = document.getElementById("inputSearch");
+var endDate = convertToNumber(new Date(document.getElementById("endDate").value));
+var startDate = convertToNumber(new Date(document.getElementById("startDate").value));
+
 for (let todo in todoList) {
+  let thisDate = convertToNumber(new Date(todoList[todo].dueDate));
   if (
-    (filterInput.value == "") ||
+    ((filterInput.value == "") ||
     (todoList[todo].title.includes(filterInput.value)) ||
-    (todoList[todo].description.includes(filterInput.value))
+    (todoList[todo].description.includes(filterInput.value))) &&
+    ((thisDate >= startDate && thisDate <= endDate) || !endDate || !startDate)
   ) {
     let newElement = document.createElement("tr");
     let newTD = document.createElement("td"); 
