@@ -11,14 +11,14 @@ let initList = function() {
     },
     success: (data) => {
       todoList = data.record;
-      updateTodoList();
+      if ($(document).ready(updateTodoList()));
     },
     error: (err) => {
       console.log(err.responseJSON);
     }
    });
 }
-initList();
+if ($(document).ready(initList()));
 
 let updateJSONbin = function() {
   $.ajax({
@@ -50,15 +50,15 @@ let deleteTodo = function(index) {
 
 let addTodo = function() {
   //get the elements in the form
-    let inputTitle = document.getElementById("inputTitle");
-    let inputDescription = document.getElementById("inputDescription");
-    let inputPlace = document.getElementById("inputPlace");
-    let inputDate = document.getElementById("inputDate");
+    let inputTitle = $('#inputTitle');
+    let inputDescription = $('#inputDescription');
+    let inputPlace = $('#inputPlace');
+    let inputDate = $('#inputDate');
   //get the values from the form
-    let newTitle = inputTitle.value;
-    let newDescription = inputDescription.value;
-    let newPlace = inputPlace.value;
-    let newDate = new Date(inputDate.value);
+    let newTitle = inputTitle.val();
+    let newDescription = inputDescription.val();
+    let newPlace = inputPlace.val();
+    let newDate = new Date(inputDate.val());
   //create new item
     let newTodo = {
         title: newTitle,
@@ -72,84 +72,65 @@ let addTodo = function() {
           todoList.push(newTodo);
           updateJSONbin();
         }
-    // window.localStorage.setItem("todos", JSON.stringify(todoList));
-    
-}
-
-let convertToNumber = function(date) {
-    var currentDayOfMonth = date.getDate();
-    var currentMonth = date.getMonth() + 1;
-    var currentYear = date.getFullYear();
-    if (currentMonth < 10) {
-      currentMonth = "0" + currentMonth;
-    } 
-    if (currentDayOfMonth < 10) {
-      currentDayOfMonth = "0" + currentDayOfMonth;
-    }
-    return parseInt(currentYear + "" + currentMonth + "" + currentDayOfMonth);
 }
 
 let updateTodoList = function() {
-  let todoListDiv =
-  document.getElementById("todoListView");
+  let todoListDiv = $("#todoListView");
+  todoListDiv.empty();
 
-  //remove all elements
-  while (todoListDiv.firstChild) {
-      todoListDiv.removeChild(todoListDiv.firstChild);
-  }
+  $("<tr><td class='title'>Title</td><td class='desc'>Description</td></tr>").appendTo(todoListDiv);
 
-  let newRow = document.createElement("tr");
-  let newData = document.createElement("td");
-  newData.append("Title");
-  newRow.appendChild(newData);
-  newData.className = "title"; 
-  newData = document.createElement("td");
-  newData.append("Description");
-  newRow.appendChild(newData);
-  newData.className = "desc";
-  todoListDiv.appendChild(newRow);
-  
-
-  let filterInput = document.getElementById("inputSearch");
-  var endDate = convertToNumber(new Date(document.getElementById("endDate").value));
-  var startDate = convertToNumber(new Date(document.getElementById("startDate").value));
+  let filterInput = $("#inputSearch");
+  var endDate = convertToNumber(new Date($('#endDate').val()));
+  var startDate = convertToNumber(new Date($('#startDate').val()));
 
   for (let todo in todoList) {
     let thisDate = convertToNumber(new Date(todoList[todo].dueDate));
     if (
-      ((filterInput.value == "") ||
-      (todoList[todo].title.includes(filterInput.value)) ||
-      (todoList[todo].description.includes(filterInput.value))) &&
-      (todoList[todo].title != "" && todoList[todo].description != "") &&
+      ((filterInput.val() == "") ||
+      (todoList[todo].title.includes(filterInput.val())) ||
+      (todoList[todo].description.includes(filterInput.val()))) &&
+      (todoList[todo].title != "" && todoList[todo].description != "") && 
       ((thisDate >= startDate && thisDate <= endDate) || !endDate || !startDate ||
-      thisDate == 19700101) // null value is converted to this date 1970/01/01 
+      thisDate == 19700101)         // null value is converted to this date 1970/01/01 
     ) {
-      let newElement = document.createElement("tr");
-      let newTD = document.createElement("td"); 
-      newTD.className = 'task1';
-      newTD.append(todoList[todo].title);
-      newElement.appendChild(newTD);
-      
-      newTD = document.createElement("td");
-      newTD.className = 'task2';
-      newTD.append(todoList[todo].description);
-      newElement.appendChild(newTD);
-
-      //delete button
-      let newDeleteButton = document.createElement("input");
-          newDeleteButton.type = "button";
-          newDeleteButton.value = "x";
-          newDeleteButton.id = "delete_btn";
-          // newDeleteButton.className = 'task';
-          newDeleteButton.addEventListener("click",
-              function() {
-                  deleteTodo(todo);
-                  updateTodoList();
-              });
-      
-      // newElement.appendChild(newContent);
-      newElement.appendChild(newDeleteButton);
-      todoListDiv.appendChild(newElement);
+      // declaring new row
+        let newRow = $("<tr></tr>");  
+      // new title data
+        $("<td></td>",{             
+          text : todoList[todo].title,    
+          class : 'task1'
+        }).appendTo(newRow);          
+      // new description data
+        $("<td></td>",{
+          text : todoList[todo].description,  
+          class : 'task2'
+        }).appendTo(newRow);
+      //button
+        $("<input></input>", {
+            type : "buttong",
+            value : "x",
+            id : "delete_btn",
+            class : "task"
+          }).click(function() {
+            deleteTodo(todo);
+            updateTodoList();
+        }).appendTo(newRow);
+        
+      todoListDiv.append(newRow);
       }
     }
+}
+
+let convertToNumber = function(date) {
+  var currentDayOfMonth = date.getDate();
+  var currentMonth = date.getMonth() + 1;
+  var currentYear = date.getFullYear();
+  if (currentMonth < 10) {
+    currentMonth = "0" + currentMonth;
+  } 
+  if (currentDayOfMonth < 10) {
+    currentDayOfMonth = "0" + currentDayOfMonth;
+  }
+  return parseInt(currentYear + "" + currentMonth + "" + currentDayOfMonth);
 }
