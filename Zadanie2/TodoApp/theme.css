@@ -1,39 +1,25 @@
-[id='headerTable'] td {
-    border: 1px solid #cccccc;
-    height: 20px;
-    text-align: center;
-    vertical-align: middle;
-}
-[class*='task'], .desc, .title {
-    border: 1px solid #cccccc;
-    height: 15px;
-    text-align: center;
-    vertical-align: middle;
-}
 .task1 {
-    width: 20.3vw;
+    width: 60vw;
 }
 .task2 {
     width: 90vw;
-}
-.title {
-    font-weight: bold;
-    width: 20vw;
-}
-.desc {
-    font-weight: bold;
-    width: 90vw;
-}
-
-input[id="delete_btn"] {
-    border: 1px solid #cccccc;
-    height: 25px;
-    width: 2vw;
-    text-align: center;
-    vertical-align: middle;
 }
 
 form, [id="inputDiv"] {
     padding: 1%;
 }
 
+h1,label, input {
+    text-align: center;
+}
+
+#formDiv {
+    text-align: center; 
+}
+
+tr:nth-child(even) {background: rgb(241, 241, 241)}
+tr:nth-child(odd) {background: #FFF}
+
+#delete_btn {
+    margin-top: 7%;
+}

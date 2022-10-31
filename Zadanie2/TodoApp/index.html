@@ -9,33 +9,41 @@
         <title>MyTODO App</title>
     </head>
     
-    <body>
-        <h1>MyNotes</h1>
-        <form>
-            <label>Title</label>
-            <input type="text" id="inputTitle"/>
-            <label>Description</label>
-            <input type="text" id="inputDescription"/>
-            <label>Place</label>
-            <input type="text" id="inputPlace"/>
-            <label>Due date</label>
-            <input type="date" id="inputDate"/>
-            <input type="button" value="add"
-            onclick="addTodo(), updateTodoList()"/>
-        </form>
-        <div id="inputDiv">
-            <label >Search tasks by title</label>
-            <input type="text" id="inputSearch" placeholder="Type Your seach here..." onchange="updateTodoList()"/>
-            <br>
-            <label>Search tasks by date</label>
-            <label> from </label>
-            <input type="date" id="startDate" onchange="updateTodoList()"/>
-            <label> to </label>
-            <input type="date" id="endDate"  
-                    onchange="updateTodoList()"/>
+    <body style="background-color : rgb(213, 213, 213)">
+        <div class="shadow-4 rounded-4 overflow-hidden container my-5" id="mainDiv" style="background-color:white">
+            <h1 text-align="center">My Notes</h1>
+            <div id="formDiv" class="bg-light">
+                <form>
+                    <label>Title</label>
+                    <input type="text" id="inputTitle"/>
+                    <label>Description</label>
+                    <input type="text" id="inputDescription"/>
+                    <br>
+                    <label>Place</label>
+                    <input type="text" id="inputPlace"/>
+                    <label>Due date</label>
+                    <input type="date" id="inputDate"/>
+                    <input type="button" value="add" class="btn btn-outline-secondary btn-sm btn-rounded"
+                    onclick="addTodo(), updateTodoList()"/>
+                </form>
+            </div>
+            
+            <div id="inputDiv">
+                <label >Search tasks by title</label>
+                <input type="text" id="inputSearch" placeholder="Type Your seach here..." onchange="updateTodoList()"/>
+                <label>or search tasks by date</label>
+                <label> from </label>
+                <input type="date" id="startDate" onchange="updateTodoList()"/>
+                <label> to </label>
+                <input type="date" id="endDate"  
+                        onchange="updateTodoList()"/>
+            </div>
+            <div >
+                <table class="table align-middle mb-0 bg-white" id="todoListView">
+                </table> 
+            </div>
         </div>
-
-        <div class="container-fluid p-3 bg-primary text-white text-center" id="todoListView">
-        </div>     
+        
+                
     </body>
 </html>

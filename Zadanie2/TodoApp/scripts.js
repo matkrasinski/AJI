@@ -78,7 +78,9 @@ let updateTodoList = function() {
   let todoListDiv = $("#todoListView");
   todoListDiv.empty();
 
-  $("<tr><td class='title'>Title</td><td class='desc'>Description</td></tr>").appendTo(todoListDiv);
+  $("<tr><th class='title'>Title</th><th class='desc'>Description</th></tr>" 
+    
+  ).appendTo(todoListDiv);
 
   let filterInput = $("#inputSearch");
   var endDate = convertToNumber(new Date($('#endDate').val()));
@@ -95,11 +97,14 @@ let updateTodoList = function() {
       thisDate == 19700101)         // null value is converted to this date 1970/01/01 
     ) {
       // declaring new row
-        let newRow = $("<tr></tr>");  
+        let newRow = $("<tr></tr>", {
+          // class : "col py-3 px-lg-5 border bg-light"
+        });  
       // new title data
         $("<td></td>",{             
           text : todoList[todo].title,    
-          class : 'task1'
+          class : "task1",
+          height : "40px"
         }).appendTo(newRow);          
       // new description data
         $("<td></td>",{
@@ -108,15 +113,16 @@ let updateTodoList = function() {
         }).appendTo(newRow);
       //button
         $("<input></input>", {
-            type : "buttong",
-            value : "x",
+            type : "button",
+            value : "Delete",
             id : "delete_btn",
-            class : "task"
+            class : "btn btn-outline-primary btn-sm btn-rounded",
+            
           }).click(function() {
             deleteTodo(todo);
             updateTodoList();
         }).appendTo(newRow);
-        
+
       todoListDiv.append(newRow);
       }
     }
