@@ -13,14 +13,14 @@ let initList = function() {
     },
     success: (data) => {
       todoList = data.record;
-      if ($(document).ready(updateTodoList()));
+      $(document).ready(updateTodoList());
     },
     error: (err) => {
       console.error(err.responseJSON);
     }
    });
 }
-if ($(document).ready(initList()));
+$(document).ready(initList());
 
 let updateJSONbin = function() {
   $.ajax({
@@ -87,8 +87,8 @@ let updateTodoList = function() {
     let thisDate = convertToNumber(new Date(todoList[todo].dueDate));
     if (
       ((filterInput.val() == "") ||
-      (todoList[todo].title.includes(filterInput.val())) ||
-      (todoList[todo].description.includes(filterInput.val()))) &&
+      (todoList[todo].title.toLowerCase().includes(filterInput.val().toLowerCase())) ||
+      (todoList[todo].description.toLowerCase().includes(filterInput.val().toLowerCase()))) &&
       (todoList[todo].title != "" && todoList[todo].description != "") && 
       ((thisDate >= startDate && thisDate <= endDate) || !endDate || !startDate ||
       thisDate == 19700101)         // null value is converted to this date 1970/01/01 
