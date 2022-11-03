@@ -1,47 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <link rel="stylesheet" type="text/css" href="theme.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="scripts.js"></script>
         <!-- CSS only -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous"></link>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
         <title>MyTODO App</title>
     </head>
     
     <body style="background-color : rgb(213, 213, 213)">
-        <div class="shadow-4 rounded-4 overflow-hidden container my-5" id="mainDiv" style="background-color:white">
-            <h1 text-align="center">My Notes</h1>
+        <div class="shadow-4 rounded-4 overflow-hidden container my-5" id="mainDiv">
+            <h1>My Notes</h1>
             <div id="formDiv" class="bg-light">
                 <form>
                     <label>Title</label>
-                    <input type="text" id="inputTitle"/>
+                    <input type="text" id="inputTitle">
                     <label>Description</label>
-                    <input type="text" id="inputDescription"/>
+                    <input type="text" id="inputDescription">
                     <br>
                     <label>Place</label>
-                    <input type="text" id="inputPlace"/>
+                    <input type="text" id="inputPlace">
                     <label>Due date</label>
-                    <input type="date" id="inputDate"/>
+                    <input type="date" id="inputDate">
                     <input type="button" value="add" class="btn btn-outline-secondary btn-sm btn-rounded"
-                    onclick="addTodo(), updateTodoList()"/>
+                    onclick="addTodo(), updateTodoList()">
                 </form>
             </div>
             
             <div id="inputDiv" >
                 <label >Search tasks by title</label>
-                <input type="text" id="inputSearch" placeholder="Type Your seach here..." onchange="updateTodoList()"/>
+                <input type="text" id="inputSearch" placeholder="Type Your seach here..." onchange="updateTodoList()">
                 <label>or search tasks by date</label>
                 <label> from </label>
-                <input type="date" id="startDate" onchange="updateTodoList()"/>
+                <input type="date" id="startDate" onchange="updateTodoList()">
                 <label> to </label>
                 <input type="date" id="endDate"  
-                        onchange="updateTodoList()"/>
+                        onchange="updateTodoList()">
             </div>
-            <div>
-                <table class="table align-middle mb-0 bg-white" id="todoListView">
-                </table> 
-            </div>
+            <table class="table align-middle mb-0 bg-white" id="todoListView"></table> 
         </div>
         
                 

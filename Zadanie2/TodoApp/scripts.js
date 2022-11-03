@@ -77,7 +77,7 @@ let updateTodoList = function() {
   let todoListDiv = $("#todoListView");
   todoListDiv.empty();
 
-  $("<tr><th>Title</th><th>Description</th></tr>").appendTo(todoListDiv);
+  $("<tr><th>Title</th><th>Description</th><th>Due Date</th></tr>").appendTo(todoListDiv);
 
   let filterInput = $("#inputSearch");
   var endDate = convertToNumber(new Date($('#endDate').val()));
@@ -98,13 +98,18 @@ let updateTodoList = function() {
       // new title data
         $("<td></td>",{             
           text : todoList[todo].title,    
-          class : "task1",
+          class : "data1",
           height : "40px"
         }).appendTo(newRow);          
       // new description data
         $("<td></td>",{
           text : todoList[todo].description,  
-          class : 'task2'
+          class : 'data2'
+        }).appendTo(newRow);
+      // date
+        $("<td></td>", {
+          text : dateToDisplay(new Date(todoList[todo].dueDate)),
+          class : 'data3'
         }).appendTo(newRow);
       //button
         $("<input></input>", {
@@ -132,4 +137,16 @@ let convertToNumber = function(date) {
     currentDayOfMonth = "0" + currentDayOfMonth;
   }
   return parseInt(currentYear + "" + currentMonth + "" + currentDayOfMonth);
+}
+
+let dateToDisplay = function(date) {
+  var currentDayOfMonth = date.getDate();
+  var currentMonth = date.getMonth() + 1;
+  if (currentMonth < 10) {
+    currentMonth = "0" + currentMonth;
+  } 
+  if (currentDayOfMonth < 10) {
+    currentDayOfMonth = "0" + currentDayOfMonth;
+  }
+  return currentDayOfMonth + '/' + currentMonth + '/' +  date.getFullYear();
 }

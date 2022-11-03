@@ -1,8 +1,11 @@
-.task1 {
+.data1 {
+    width: 40vw;
+}
+.data2 {
     width: 60vw;
 }
-.task2 {
-    width: 90vw;
+.data3 {
+    width: 30vw;
 }
 
 form, [id="inputDiv"] {
@@ -22,4 +25,8 @@ tr:nth-child(odd) {background: #FFF}
 
 #delete_btn {
     margin-top: 7%;
+}
+
+#mainDiv {
+    background-color:white
 }
