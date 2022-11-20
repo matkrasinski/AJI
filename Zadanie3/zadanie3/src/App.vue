@@ -1,20 +1,42 @@
 <template>
   <div class="container">
-    <SearchEngine/>
-    <MoviesTable/>
+    <SearchEngine :movieList="movieList" @filtered-data="onUserSearchData"/>
+    <MoviesTable :moviesToDisplay="moviesToDisplay" />
+    <MovieListByGenres :movieList="movieList" />
+    <MovieListByCast :movieList="movieList"/>
   </div>
 </template>
 
 <script>
 import SearchEngine from './components/SearchEngine.vue';
 import MoviesTable from './components/MoviesTable.vue';
+import MovieListByGenres from './components/MovieListByGenres.vue';
+import MovieListByCast from './components/MovieListByCast.vue';
+import jsonData from './../data/movies.json'
 
 export default {
   name: 'App',
   components: {
     SearchEngine,
-    MoviesTable
+    MoviesTable,
+    MovieListByGenres,
+    MovieListByCast
+  }, 
+  data() {
+    return {
+      moviesToDisplay: jsonData,
+      movieList: jsonData
+    }
   },
+  methods: {
+    onUserSearchData(filteredMovies) {
+      if (filteredMovies.length === this.movieList.length) {
+        this.moviesToDisplay = this.movieList; 
+      }else {
+        this.moviesToDisplay = filteredMovies;
+      }
+    }
+  }
 }
 </script>
 
