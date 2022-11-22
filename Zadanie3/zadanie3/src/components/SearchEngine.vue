@@ -20,7 +20,7 @@
             <input type="text" class="form-control" v-model="cast" id="actorName" placeholder="Actor">
         </div>
         <div>
-            <button class="btn btn-primary col-12" @click="this.$emit('filtered-data', this.findMovie())">Search</button>
+            <button class="btn btn-primary col-12" @click="emitData">Search</button>
         </div>
     </div>
 </template>
@@ -41,39 +41,41 @@ export default {
     emits: ['filtered-data'],
     methods: {
         findMovie() {
-            
             const searchedMovies = _.filter(this.$props.movieList, (movie) => { 
-            
             let dateToVal = false;
             let dateFromVal = false;
             let haveActor = false;
             const title = movie.title.toLowerCase().includes(this.title.toLowerCase());
-            const actor = _.filter(movie.cast, (actor) =>{
-            // return actor === this.actor;
-            return actor.toLowerCase().includes(this.actor);
+            const actor = _.filter(movie.cast, (cast) =>{
+                return cast.toLowerCase().includes(this.cast);
             });
 
             if (actor.length > 0) {
-            haveActor = true;
-            } else if (!this.actor) {
-            haveActor = true;
+                haveActor = true;
+            } else if (!this.cast) {
+                haveActor = true;
             }
             
-            if (parseInt(movie.year) <= parseInt(this.dateTo)) {
-            dateToVal = true;
-            } else if (!this.dateTo) {
-            dateToVal = true;
+            if (parseInt(movie.year) <= parseInt(this.tillDate)) {
+                dateToVal = true;
+            } else if (!this.tillDate) {
+                dateToVal = true;
             }
 
-            if (parseInt(movie.year) >= parseInt(this.dateFrom)) {
-            dateFromVal = true;
-            } else if (!this.dateFrom) {
-            dateFromVal = true;
+            if (parseInt(movie.year) >= parseInt(this.fromDate)) {
+                dateFromVal = true;
+            } else if (!this.fromDate) {
+                dateFromVal = true;
             }
 
             return title && dateToVal && dateFromVal && haveActor;
         });
+        console.log(searchedMovies)
         return searchedMovies;
+        },
+        emitData() {
+            const filteredData = this.findMovie();
+            this.$emit('filtered-data', filteredData);
         }
     }
 
@@ -81,7 +83,7 @@ export default {
 </script>
 
 <style>
-    label {
+    label, h1    {
         font-weight: bold;
     }
  
