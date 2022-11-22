@@ -34,13 +34,13 @@ export default {
                 return movie.cast.length;
             })).slice(0, 100);
             let uniqGenres = [];
-        // Appending to uniqActors, actor from selectedMovies 
+        // Appending to uniqGenres, genre from selectedMovies 
             _.forEach(selectedMovies, (movie) => {
                 _.forEach(movie.genres, (genre) => {
                     uniqGenres.push(genre); 
                 });
             });
-        // Picking only 100 unique actors
+        // Picking only 100 unique genres
             uniqGenres = _.shuffle(_.uniq(uniqGenres)).slice(0, 100);
             this.genres = uniqGenres;
             this.movies = selectedMovies;

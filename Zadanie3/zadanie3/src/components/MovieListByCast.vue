@@ -10,7 +10,6 @@
                     </li>
                 </ol>
             </li>
-
         </ul>
     </div>
 </template>
@@ -56,7 +55,6 @@ export default {
             this.selectHundredRandomMovies();
         },
 }
-
 </script>
 
 <style> 
@@ -65,5 +63,4 @@ export default {
         font-weight: bold;
         font-size: larger;
     }
-
 </style>
