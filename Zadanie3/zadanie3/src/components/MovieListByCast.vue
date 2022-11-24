@@ -41,13 +41,13 @@ export default {
             });
         // Picking only 100 unique actors
             uniqActors = _.shuffle(_.uniq(uniqActors)).slice(0, 100);
-            this.actors = uniqActors;
+            this.actors = _.sortBy(uniqActors);
             this.movies = selectedMovies;
         },
         getMovieByCast(actor) {
-            const moviesByActor = _.filter(this.movies, (movie) => {
-            return _.contains(movie.cast, actor);
-            });
+            const moviesByActor = _.sortBy(_.filter(this.movies, (movie) => {
+                return _.contains(movie.cast, actor);
+            }), 'title');
             return moviesByActor;
             }
         },

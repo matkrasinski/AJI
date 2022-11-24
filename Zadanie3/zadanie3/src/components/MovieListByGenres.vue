@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <header> Movies by genres </header>
-        <ul>
+        <ol>
             <li v-for="(genre, index) in genres" :key="index" >
                 {{genre}}
                 <ol>
@@ -10,8 +10,7 @@
                     </li>
                 </ol>
             </li>
-
-        </ul>
+        </ol>
     </div>
 </template>
 
@@ -42,18 +41,19 @@ export default {
             });
         // Picking only 100 unique genres
             uniqGenres = _.shuffle(_.uniq(uniqGenres)).slice(0, 100);
-            this.genres = uniqGenres;
-            this.movies = selectedMovies;
+            this.genres = _.sortBy(uniqGenres); 
+            this.movies = _.sortBy(selectedMovies);
+            
         },
         getMovieByGenre(genre) {
-            const moviesByGenres = _.filter(this.movies, (movie) => {
+            var moviesByGenres = _.sortBy(_.filter(_.sortBy(this.movies), (movie) => {
                 return _.contains(movie.genres, genre);
-            });
+            }), 'title');
             return moviesByGenres;
             }
         },
         mounted() {
-            this.selectHundredRandomMovies();
+            _.sortBy(this.selectHundredRandomMovies());
         },
 }
 

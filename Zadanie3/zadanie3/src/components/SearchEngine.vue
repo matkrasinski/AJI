@@ -5,16 +5,16 @@
         </header>
         <div>
             <div class="form-group">
-                <label for="movieTitle">Title : </label>
-                <input type="text" class="form-control" v-model="title" id="movieTitle" placeholder="Movie title"/>
+                <label for="title">Title : </label>
+                <input type="text" class="form-control" v-model.trim="title" id="title" placeholder="Movie title"/>
             </div>
             <div class="form-group">
                 <label for="fromDate">Year of production from : </label>
-                <input type="text" class="form-control" v-model="fromDate" id="fromDate" placeholder="Year from"/>
+                <input type="text" class="form-control" v-model.trim="fromDate" id="fromDate" placeholder="Year from"/>
             </div>
             <div class="form-group">
                 <label for="toDate">Year of production to : </label>
-                <input type="text" class="form-control" v-model="toDate" id="toDate" placeholder="Year to"/>
+                <input type="text" class="form-control" v-model.trim="toDate" id="toDate" placeholder="Year to"/>
             </div>
             <div class="form-group">
                 <label for="actorName">Cast : </label>

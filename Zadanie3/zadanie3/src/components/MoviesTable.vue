@@ -18,10 +18,11 @@
                 class="btn btn-outline-dark" value="Display less">
         <input type="button" id="displayMoreButton" @click="displayMore()" 
                 class="btn btn-outline-dark" value="Display more">
+
+        <p>{{moviesToDisplay.length > step ? step : moviesToDisplay.length}} to {{moviesToDisplay.length}}</p>
     </div>
     <div v-else class="container">  
         <div class="alert alert-info"> <p> No results </p> </div>
-
     </div>
 </template>
 
@@ -36,19 +37,12 @@ export default {
     },
     methods: {
         displayMore() {
-            if (this.step < this.$props.moviesToDisplay.length - 10)
+            if (this.step < this.$props.moviesToDisplay.length)
                 this.step += 10;
         },
         displayLess() {
             if (this.step > 10)
             this.step -= 10
-        },
-        setDataToDisplay(filteredMovies) {
-            if (this.filteredMovieList.length === this.movieList.length) {
-                this.filteredMovieList = this.movieList;
-            } else {
-                this.filteredMovieList = filteredMovies;
-            }
         },
         displayArrayAsString(list) {
             var res = ''
@@ -57,7 +51,7 @@ export default {
             }
             return res;
         }
-    },
+    }
 }
 </script>
 
