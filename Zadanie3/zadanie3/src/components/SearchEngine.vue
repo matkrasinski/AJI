@@ -18,7 +18,7 @@
             </div>
             <div class="form-group">
                 <label for="actorName">Cast : </label>
-                <input type="text" class="form-control" v-model="cast" id="actorName" placeholder="Actor">
+                <input type="text" class="form-control" v-model.trim="cast" id="actorName" placeholder="Actor">
             </div>
             <div>
                 <button id="btn" class="btn btn-primary col-12" @click="this.$emit('filtered-data', findMovie())">Search</button>
@@ -47,7 +47,7 @@ export default {
             const searchedMovies = _.filter(this.$props.movieList, (movie) => { 
                 const title = movie.title.toLowerCase().includes(this.title.toLowerCase());
                 const actor = _.filter(movie.cast, (cast) => {
-                    return cast.toLowerCase().includes(this.cast);
+                    return cast.toLowerCase().includes(this.cast.toLowerCase());
                 });
                 return title && (parseInt(movie.year) <= parseInt(this.toDate) || !this.toDate) 
                             && (parseInt(movie.year) >= parseInt(this.fromDate) || !this.fromDate) 
