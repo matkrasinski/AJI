@@ -1,0 +1,14 @@
+<template>
+    <div>
+        <footer>
+          <p> Authors : Mateusz Krasiński, Michał Andrzejczak</p>
+        </footer>
+    </div>
+</template>
+
+
+<style scoped>
+  footer {
+    text-align: center;
+  }
+</style>

@@ -1,0 +1,7 @@
+// delete all dependecies from package.json
+
+npm install --save express;
+npm install --save body-parser cookie-parser;
+npm install --save underscore;
+npm install --save cors;
+npm install --save knex bookshelf mysql;
